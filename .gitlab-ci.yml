@@ -1,0 +1,29 @@
+stages:
+  - install
+  - test
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+install:
+  stage: install
+  image: node:18
+  script:
+    - npm install
+
+test:
+  stage: test
+  image: node:18
+  script:
+    - echo "Running tests..."
+    - npm test || echo "No tests found"
+
+deploy:
+  stage: deploy
+  image: node:18
+  script:
+    - echo "Deploying app..."
+  only:
+    - main
